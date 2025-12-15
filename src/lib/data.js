@@ -75,7 +75,12 @@ export async function getProveedor(id) {
     console.log("Recuperando proveedor...");
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    return { success: "Este mensaje tarda 3 segundos en llegar" };
+    const results = await db.query("select * from proveedores where id=?", [
+      id,
+    ]);
+    console.log(results);
+
+    return results[0];
   } catch (error) {
     // console.log(error);
     return null;
